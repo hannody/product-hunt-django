@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!--https://bootsnipp.com/snippets/0BVEA-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <!-- Site Properties -->
+    <title>Product Hunt by Mohanad Abu-Nayla</title>
+
+    <!-- Stylesheets -->
+    
+</head>
+<body>
+<div class="container">
+	<h3>Add a new product</h3>
+    <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            Title:
+            <br/>
+            <input type ="text" name = "title" placeholder="Prodect's name/title" required autofocus/>
+            <br/>
+            Body:
+            <br/>
+            <input type="textbox" name ="body" placeholder="Prodect Description" required autofocus/>
+            <br/>
+            URL:
+            <br/>
+            <input type ="text" name = "url" placeholder="Link to product webpage" required autofocus/>
+            <br/>
+            Icon:
+            <br/>
+            <input type ="file" name = "icon"/ placeholder="Upload an icon here" required autofocus>
+            <br/>
+            Image:
+            <br/>
+            <input type ="file" name = "image"/ placeholder="Upload the prodect image" required autofocus>
+            <br/>
+            <br/>
+            <input class ="btn btn-primary" type= "submit", value="Add Product"/>
+        </form>
+{% if error %}
+
+<p> <font color="red">{{ error }}</font></p>
+<br/>
+<br/>
+{% endif %}
+
+{% if messages %}
+<p class="messages">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}> <font color="red"> {{ message }}</font></p>
+    {% endfor %}
+</p>
+{% endif %}
+{% endblock %}

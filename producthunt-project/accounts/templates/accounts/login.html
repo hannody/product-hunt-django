@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!--https://bootsnipp.com/snippets/0BVEA-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <!-- Site Properties -->
+    <title>Product Hunt by Mohanad Abu-Nayla</title>
+
+    <!-- Stylesheets -->
+    
+</head>
+<body>
+<div class="container">
+
+    <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            Username:
+            <br/>
+            <input type ="text" name = "username"/>
+            <br/>
+            Password:
+            <br/>
+            <input type="password" name ="password"/>
+            <br/>
+            <br/>
+            <br/>
+            <input class ="btn btn-primary" type= "submit", value="Login"/>
+        </form>
+{% if error %}
+
+<p> <font color="red">{{ error }}</font></p>
+<br/>
+<br/>
+{% endif %}
+
+{% if messages %}
+<p class="messages">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}> <font color="red"> {{ message }}</font></p>
+    {% endfor %}
+</p>
+{% endif %}
+{% endblock %}
